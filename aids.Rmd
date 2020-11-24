@@ -1,0 +1,40 @@
+---
+title: "AIDS"
+author: "Elliott Detjen"
+date: "11/23/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(tidyverse)
+library(readr)
+
+aids <- Book2 <- read_csv("Book2.csv", col_types = cols(
+  year = col_double(),
+  cases = col_double(),
+  death = col_double()
+))
+
+
+aids %>%
+  ggplot(aes(x = year)) +
+  geom_point(y = aids$death) +
+  geom_point(y = cases)
+
+aids %>%
+  ggplot(aes(x = year, y = death)) +
+  geom_line()
+
+ggplot(aids, aes(x=year)) + 
+  geom_line(aes(y = death), color = "red") + 
+  geom_point(aes(y = death)) +
+  geom_line(aes(y = cases), color = "blue") +
+  geom_point(aes(y = cases)) +
+  theme_classic()
+```
+
